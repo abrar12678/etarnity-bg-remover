@@ -1,0 +1,293 @@
+{% extends "base.html" %}
+
+{% block title %}Etarnity Background Remover | Modern Logo & Photo Background Removal{% endblock %}
+
+{% block content %}
+<section class="relative overflow-hidden">
+    <div
+        class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(249,115,22,0.15),_transparent_40%),radial-gradient(circle_at_bottom_right,_rgba(251,146,60,0.12),_transparent_35%)]">
+    </div>
+
+    <div class="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 md:py-20">
+        <div class="grid items-center gap-12 lg:grid-cols-2">
+            <div class="animate-fadeIn">
+                <span
+                    class="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-white/80 px-4 py-2 text-sm font-medium text-orange-700 backdrop-blur">
+                    Modern Background Removal Tool
+                </span>
+
+                <h1
+                    class="mt-6 max-w-3xl text-4xl font-black leading-tight tracking-tight text-slate-900 sm:text-5xl md:text-6xl">
+                    Remove backgrounds from
+                    <span class="text-orange-500"> logos</span> and
+                    <span class="text-orange-500"> photos</span> with a cleaner workflow
+                </h1>
+
+                <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
+                    A refined background remover for fast logo cleanup and high-quality photo cutouts.
+                    Choose your mode, upload your image, and download a polished transparent PNG.
+                </p>
+
+                <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+                    <a href="#tool"
+                        class="inline-flex items-center justify-center gap-2 rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-orange-200 transition duration-300 hover:-translate-y-0.5 hover:bg-orange-600 hover:shadow-xl hover:shadow-orange-200">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
+                            <path d="M12 16V4"></path>
+                            <path d="M7 9l5-5 5 5"></path>
+                            <path d="M4 20h16"></path>
+                        </svg>
+                        Start Removing Background
+                    </a>
+
+                    <a href="#how-it-works"
+                        class="inline-flex items-center justify-center gap-2 rounded-full border border-orange-200 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition duration-300 hover:-translate-y-0.5 hover:bg-orange-50 hover:text-orange-600">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
+                            <circle cx="12" cy="12" r="9"></circle>
+                            <path d="M12 7v5l3 3"></path>
+                        </svg>
+                        How It Works
+                    </a>
+                </div>
+
+                <div class="mt-10 grid gap-4 sm:grid-cols-3">
+                    <div
+                        class="rounded-2xl border border-orange-100 bg-white/90 p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-orange-100">
+                        <p class="text-sm font-semibold text-slate-900">Logo Ready</p>
+                        <p class="mt-2 text-sm leading-6 text-slate-500">
+                            Pick a background color and remove it instantly.
+                        </p>
+                    </div>
+
+                    <div
+                        class="rounded-2xl border border-orange-100 bg-white/90 p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-orange-100">
+                        <p class="text-sm font-semibold text-slate-900">AI Photo Cutout</p>
+                        <p class="mt-2 text-sm leading-6 text-slate-500">
+                            Better subject separation for portraits and product images.
+                        </p>
+                    </div>
+
+                    <div
+                        class="rounded-2xl border border-orange-100 bg-white/90 p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-orange-100">
+                        <p class="text-sm font-semibold text-slate-900">Transparent PNG</p>
+                        <p class="mt-2 text-sm leading-6 text-slate-500">
+                            Download clean transparent output for reuse anywhere.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tool" class="relative animate-fadeIn">
+                <div
+                    class="absolute -inset-2 rounded-[32px] bg-gradient-to-br from-orange-200/40 to-orange-100/20 blur-2xl">
+                </div>
+
+                <div
+                    class="relative rounded-[32px] border border-orange-200/80 bg-white/90 p-5 shadow-[0_20px_60px_rgba(249,115,22,0.12)] backdrop-blur sm:p-6 md:p-8">
+                    <div
+                        class="rounded-[26px] border border-orange-100 bg-gradient-to-b from-white to-orange-50/40 p-6 sm:p-8">
+                        <div class="text-center">
+                            <div
+                                class="mx-auto flex h-16 w-16 animate-float items-center justify-center rounded-3xl bg-orange-100 text-orange-600 shadow-inner">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8">
+                                    <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                                    <circle cx="8.5" cy="10" r="1.5"></circle>
+                                    <path d="M21 16l-5-5-4 4-2-2-4 4"></path>
+                                </svg>
+                            </div>
+
+                            <h2 class="mt-5 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+                                Smart Background Removal
+                            </h2>
+                            <p class="mt-3 text-sm leading-7 text-slate-500 sm:text-base">
+                                Choose the correct mode and get a cleaner result faster.
+                            </p>
+                        </div>
+
+                        <form method="POST" action="/process-image" enctype="multipart/form-data" class="mt-8 space-y-6"
+                            id="uploadForm">
+                            <div class="grid gap-4 sm:grid-cols-2">
+                                <div class="rounded-2xl border border-orange-100 bg-white p-4">
+                                    <label class="mb-2 block text-sm font-medium text-slate-700">Processing Mode</label>
+                                    <select id="modeSelect" name="mode" required
+                                        class="w-full rounded-xl border border-orange-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none focus:border-orange-400">
+                                        <option value="" {% if not selected_mode %}selected{% endif %}>Select a mode
+                                        </option>
+                                        <option value="logo" {% if selected_mode=="logo" %}selected{% endif %}>Logo Mode
+                                        </option>
+                                        <option value="photo" {% if selected_mode=="photo" %}selected{% endif %}>Photo
+                                            Mode (AI)</option>
+                                    </select>
+                                </div>
+
+                                <div id="colorPickerWrapper"
+                                    class="hidden rounded-2xl border border-orange-100 bg-white p-4">
+                                    <label class="mb-2 block text-sm font-medium text-slate-700">Color to Remove</label>
+                                    <input type="color" name="bg_color" value="{{ selected_bg_color or '#ffffff' }}"
+                                        class="h-12 w-full cursor-pointer rounded-xl border border-orange-200 bg-white p-2" />
+                                </div>
+                            </div>
+
+                            <div id="dropZone"
+                                class="rounded-3xl border-2 border-dashed border-orange-200 bg-white p-6 text-center transition duration-300 hover:border-orange-300 hover:bg-orange-50/40">
+                                <div
+                                    class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-100 text-orange-600">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7">
+                                        <path d="M12 16V4"></path>
+                                        <path d="M7 9l5-5 5 5"></path>
+                                        <path d="M4 20h16"></path>
+                                    </svg>
+                                </div>
+
+                                <label class="mb-3 block text-base font-semibold text-slate-900">
+                                    Upload your image
+                                </label>
+
+                                <input id="signatureInput" type="file" name="image" accept=".png,.jpg,.jpeg,.webp"
+                                    required
+                                    class="block w-full rounded-xl border border-orange-200 bg-white px-4 py-3 text-sm text-slate-700 file:mr-4 file:rounded-full file:border-0 file:bg-orange-500 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-orange-600" />
+
+                                <p class="mt-3 text-xs text-slate-400">
+                                    Drag & drop is also supported
+                                </p>
+
+                                <p class="mt-2 text-xs text-orange-600">
+                                    Logo Mode: choose the background color you want removed. Photo Mode: use AI cutout
+                                    for people, objects, and portraits.
+                                </p>
+                            </div>
+
+                            <div id="livePreviewContainer"
+                                class="hidden rounded-3xl border border-orange-100 bg-orange-50/60 p-5">
+                                <p class="mb-3 text-sm font-semibold text-slate-900">Live Preview</p>
+                                <div class="flex min-h-[180px] items-center justify-center rounded-2xl bg-white p-4">
+                                    <img id="livePreview" src="" alt="Live preview"
+                                        class="max-h-44 max-w-full object-contain" />
+                                </div>
+                            </div>
+
+                            <button type="submit"
+                                class="inline-flex w-full items-center justify-center rounded-full bg-orange-500 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-orange-200 transition duration-300 hover:-translate-y-0.5 hover:bg-orange-600 hover:shadow-xl hover:shadow-orange-200">
+                                Remove Background
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% if original_image and processed_image %}
+<section class="mx-auto max-w-7xl px-4 pb-16 sm:px-6 animate-fadeIn">
+    <div
+        class="rounded-[32px] border border-orange-100 bg-white/90 p-6 shadow-[0_16px_50px_rgba(249,115,22,0.08)] sm:p-8">
+        <div class="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+                <h3 class="text-2xl font-bold tracking-tight text-slate-900">Processing Result</h3>
+                <p class="mt-2 text-sm text-slate-500">
+                    Compare the original and the transparent output before downloading.
+                </p>
+            </div>
+
+            <a href="{{ url_for('download_file', filename=download_file) }}"
+                class="inline-flex items-center justify-center rounded-full bg-green-600 px-6 py-3 text-sm font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:bg-green-700">
+                Download Transparent PNG
+            </a>
+        </div>
+
+        <div class="grid gap-6 lg:grid-cols-2">
+            <div
+                class="rounded-3xl border border-orange-100 bg-orange-50/40 p-5 transition duration-300 hover:shadow-md">
+                <p class="mb-3 text-sm font-semibold text-slate-900">Original Image</p>
+                <div class="flex min-h-[260px] items-center justify-center rounded-2xl bg-white p-4">
+                    <img src="{{ original_image }}" alt="Original Image" class="max-h-72 max-w-full object-contain" />
+                </div>
+                <p class="mt-4 text-sm text-slate-600">
+                    Dimensions: {{ original_width }} × {{ original_height }}
+                </p>
+            </div>
+
+            <div
+                class="rounded-3xl border border-orange-100 bg-orange-50/40 p-5 transition duration-300 hover:shadow-md">
+                <p class="mb-3 text-sm font-semibold text-slate-900">Processed Image</p>
+                <div
+                    class="flex min-h-[260px] items-center justify-center rounded-2xl bg-[linear-gradient(45deg,#f3f4f6_25%,transparent_25%,transparent_75%,#f3f4f6_75%,#f3f4f6),linear-gradient(45deg,#f3f4f6_25%,transparent_25%,transparent_75%,#f3f4f6_75%,#f3f4f6)] bg-[length:20px_20px] bg-[position:0_0,10px_10px] p-4">
+                    <img src="{{ processed_image }}" alt="Processed Image" class="max-h-72 max-w-full object-contain" />
+                </div>
+                <p class="mt-4 text-sm text-slate-600">
+                    Dimensions: {{ processed_width }} × {{ processed_height }}
+                </p>
+                <p class="mt-1 text-sm text-slate-600">
+                    File size: {{ processed_file_size_kb }} KB
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<section id="how-it-works" class="mx-auto max-w-7xl px-4 pb-20 sm:px-6">
+    <div class="mb-8 max-w-2xl">
+        <h3 class="text-3xl font-bold tracking-tight text-slate-900">How it works</h3>
+        <p class="mt-3 text-slate-500">
+            A simple 3-step workflow designed to keep the tool fast and clear.
+        </p>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-3">
+        <div
+            class="group rounded-3xl border border-orange-100 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-orange-200 hover:bg-orange-50 hover:shadow-lg hover:shadow-orange-100">
+            <div
+                class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-100 text-orange-600 transition duration-300 group-hover:bg-orange-500 group-hover:text-white">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="h-5 w-5">
+                    <path d="M12 16V4"></path>
+                    <path d="M7 9l5-5 5 5"></path>
+                    <path d="M4 20h16"></path>
+                </svg>
+            </div>
+            <h4 class="text-lg font-semibold text-slate-900">1. Choose and upload</h4>
+            <p class="mt-3 text-sm leading-6 text-slate-500">
+                Select Logo Mode or Photo Mode and upload the image you want to clean up.
+            </p>
+        </div>
+
+        <div
+            class="group rounded-3xl border border-orange-100 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-orange-200 hover:bg-orange-50 hover:shadow-lg hover:shadow-orange-100">
+            <div
+                class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-100 text-orange-600 transition duration-300 group-hover:bg-orange-500 group-hover:text-white">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="h-5 w-5">
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <path d="M12 8v4l3 2"></path>
+                </svg>
+            </div>
+            <h4 class="text-lg font-semibold text-slate-900">2. Process cleanly</h4>
+            <p class="mt-3 text-sm leading-6 text-slate-500">
+                The tool removes the selected logo color or uses AI to cut out photo backgrounds.
+            </p>
+        </div>
+
+        <div
+            class="group rounded-3xl border border-orange-100 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-orange-200 hover:bg-orange-50 hover:shadow-lg hover:shadow-orange-100">
+            <div
+                class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-100 text-orange-600 transition duration-300 group-hover:bg-orange-500 group-hover:text-white">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="h-5 w-5">
+                    <path d="M12 4v12"></path>
+                    <path d="M7 11l5 5 5-5"></path>
+                    <path d="M4 20h16"></path>
+                </svg>
+            </div>
+            <h4 class="text-lg font-semibold text-slate-900">3. Download result</h4>
+            <p class="mt-3 text-sm leading-6 text-slate-500">
+                Review the transparent PNG and download it instantly for reuse anywhere.
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock %}
