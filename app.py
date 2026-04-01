@@ -1,6 +1,5 @@
 import os
 import uuid
-import io
 import requests
 from PIL import Image
 from flask import Flask, render_template, request, send_from_directory, url_for, redirect, flash, session
@@ -9,9 +8,8 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 app.secret_key = "etarnity-background-remover-secret-key"
 
-BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-UPLOAD_FOLDER = os.path.join(BASE_DIR, "static", "uploads")
-PROCESSED_FOLDER = os.path.join(BASE_DIR, "static", "processed")
+UPLOAD_FOLDER = "/tmp/uploads"
+PROCESSED_FOLDER = "/tmp/processed"
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(PROCESSED_FOLDER, exist_ok=True)
@@ -73,6 +71,9 @@ def save_png(image: Image.Image, output_path: str):
 
 
 def remove_photo_background_with_api(input_path: str, output_path: str):
+    if not REMOVE_BG_API_KEY:
+        raise Exception("REMOVE_BG_API_KEY is not set")
+
     with open(input_path, "rb") as image_file:
         response = requests.post(
             "https://api.remove.bg/v1.0/removebg",
@@ -154,8 +155,8 @@ def process_image():
         processed_file_size_kb = round(os.path.getsize(output_path) / 1024, 2)
 
         session["result_data"] = {
-            "original_image": url_for("static", filename=f"uploads/{upload_filename}"),
-            "processed_image": url_for("static", filename=f"processed/{output_filename}"),
+            "original_image": url_for("uploaded_file", filename=upload_filename),
+            "processed_image": url_for("processed_file", filename=output_filename),
             "download_file": output_filename,
             "original_width": original_size[0],
             "original_height": original_size[1],
@@ -175,6 +176,16 @@ def process_image():
         print("Processing error:", e)
         flash("Something went wrong while processing the image.")
         return redirect(url_for("index"))
+
+
+@app.route("/uploads/<filename>")
+def uploaded_file(filename):
+    return send_from_directory(app.config["UPLOAD_FOLDER"], filename)
+
+
+@app.route("/processed/<filename>")
+def processed_file(filename):
+    return send_from_directory(app.config["PROCESSED_FOLDER"], filename)
 
 
 @app.route("/download/<filename>")
