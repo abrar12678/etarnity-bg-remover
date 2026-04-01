@@ -22,7 +22,7 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 app.config["PROCESSED_FOLDER"] = PROCESSED_FOLDER
 app.config["MAX_CONTENT_LENGTH"] = 10 * 1024 * 1024
 
-REMOVE_BG_API_KEY = "zgMjaVPfysuLJSjrDzZnTnhW"
+REMOVE_BG_API_KEY = os.getenv("zgMjaVPfysuLJSjrDzZnTnhW")
 
 
 def allowed_file(filename):
