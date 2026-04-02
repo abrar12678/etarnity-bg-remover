@@ -6,10 +6,11 @@ from flask import Flask, render_template, request, send_from_directory, url_for,
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
-app.secret_key = "etarnity-background-remover-secret-key"
+app.secret_key = os.getenv("SECRET_KEY", "etarnity-background-remover-secret-key")
 
-UPLOAD_FOLDER = "/tmp/uploads"
-PROCESSED_FOLDER = "/tmp/processed"
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+UPLOAD_FOLDER = os.path.join(BASE_DIR, "static", "uploads")
+PROCESSED_FOLDER = os.path.join(BASE_DIR, "static", "processed")
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(PROCESSED_FOLDER, exist_ok=True)
@@ -29,7 +30,7 @@ def allowed_file(filename):
 
 def hex_to_rgb(hex_color: str):
     hex_color = hex_color.lstrip("#")
-    return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
+    return tuple(int(hex_color[i:i + 2], 16) for i in (0, 2, 4))
 
 
 def remove_selected_color_background(image: Image.Image, bg_color: str, tolerance: int = 40) -> Image.Image:
@@ -155,8 +156,8 @@ def process_image():
         processed_file_size_kb = round(os.path.getsize(output_path) / 1024, 2)
 
         session["result_data"] = {
-            "original_image": url_for("uploaded_file", filename=upload_filename),
-            "processed_image": url_for("processed_file", filename=output_filename),
+            "original_image": url_for("static", filename=f"uploads/{upload_filename}"),
+            "processed_image": url_for("static", filename=f"processed/{output_filename}"),
             "download_file": output_filename,
             "original_width": original_size[0],
             "original_height": original_size[1],
@@ -173,19 +174,11 @@ def process_image():
         return redirect(url_for("index"))
 
     except Exception as e:
-        print("Processing error:", e)
-        flash("Something went wrong while processing the image.")
+        import traceback
+        print("Processing error:", str(e))
+        traceback.print_exc()
+        flash(f"Something went wrong while processing the image: {str(e)}")
         return redirect(url_for("index"))
-
-
-@app.route("/uploads/<filename>")
-def uploaded_file(filename):
-    return send_from_directory(app.config["UPLOAD_FOLDER"], filename)
-
-
-@app.route("/processed/<filename>")
-def processed_file(filename):
-    return send_from_directory(app.config["PROCESSED_FOLDER"], filename)
 
 
 @app.route("/download/<filename>")
