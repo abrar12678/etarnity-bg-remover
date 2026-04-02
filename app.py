@@ -21,8 +21,6 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 app.config["PROCESSED_FOLDER"] = PROCESSED_FOLDER
 app.config["MAX_CONTENT_LENGTH"] = 10 * 1024 * 1024
 
-REMOVE_BG_API_KEY = os.getenv("zgMjaVPfysuLJSjrDzZnTnhW")
-
 
 def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -72,7 +70,9 @@ def save_png(image: Image.Image, output_path: str):
 
 
 def remove_photo_background_with_api(input_path: str, output_path: str):
-    if not REMOVE_BG_API_KEY:
+    api_key = os.getenv("REMOVE_BG_API_KEY")
+
+    if not api_key:
         raise Exception("REMOVE_BG_API_KEY is not set")
 
     with open(input_path, "rb") as image_file:
@@ -80,7 +80,7 @@ def remove_photo_background_with_api(input_path: str, output_path: str):
             "https://api.remove.bg/v1.0/removebg",
             files={"image_file": image_file},
             data={"size": "auto"},
-            headers={"X-Api-Key": REMOVE_BG_API_KEY},
+            headers={"X-Api-Key": api_key},
             timeout=120,
         )
 
