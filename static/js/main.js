@@ -11,17 +11,35 @@ document.addEventListener("DOMContentLoaded", function () {
     const colorPickerWrapper = document.getElementById("colorPickerWrapper");
 
     if (menuToggle && mobileMenu && menuIcon && closeIcon) {
+        function openMobileMenu() {
+            mobileMenu.classList.remove("max-h-0", "grid-rows-[0fr]", "opacity-0", "-translate-y-2");
+            mobileMenu.classList.add("mt-4", "max-h-96", "grid-rows-[1fr]", "opacity-100", "translate-y-0");
+
+            menuIcon.classList.add("hidden");
+            closeIcon.classList.remove("hidden");
+        }
+
+        function closeMobileMenu() {
+            mobileMenu.classList.remove("mt-4", "max-h-96", "grid-rows-[1fr]", "opacity-100", "translate-y-0");
+            mobileMenu.classList.add("max-h-0", "grid-rows-[0fr]", "opacity-0", "-translate-y-2");
+
+            menuIcon.classList.remove("hidden");
+            closeIcon.classList.add("hidden");
+        }
+
         menuToggle.addEventListener("click", function () {
-            mobileMenu.classList.toggle("hidden");
-            menuIcon.classList.toggle("hidden");
-            closeIcon.classList.toggle("hidden");
+            const isClosed = mobileMenu.classList.contains("max-h-0");
+
+            if (isClosed) {
+                openMobileMenu();
+            } else {
+                closeMobileMenu();
+            }
         });
 
         mobileMenu.querySelectorAll("a").forEach((link) => {
             link.addEventListener("click", function () {
-                mobileMenu.classList.add("hidden");
-                menuIcon.classList.remove("hidden");
-                closeIcon.classList.add("hidden");
+                closeMobileMenu();
             });
         });
     }
