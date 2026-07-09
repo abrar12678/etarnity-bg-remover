@@ -77,7 +77,7 @@ gunicorn -w 4 -b 0.0.0.0:5000 app:app
 
 ## Live Demo
 
-Try the tool live: [etarnity-bg-remover.vercel.app](https://etarnity-bg-remover.vercel.app)
+Try the tool live: [[etarnity-bg-remover.vercel.app](https://etarnity-bg-remover.vercel.app](https://etarnity-bg-remover.onrender.com))
 
 ## Resources
 
